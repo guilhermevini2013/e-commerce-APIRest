@@ -39,7 +39,6 @@ public class CategoryService implements Iservice<CategoryDTO> {
     @Override
     @Transactional(readOnly = true)
     public List<CategoryDTO> list() {
-        List<Category> list = categoryRepository.findAll();
-      return list.stream().map(x -> new CategoryDTO(x)).collect(Collectors.toList());
+      return categoryRepository.findAll().stream().map(x -> new CategoryDTO(x)).collect(Collectors.toList());
     }
 }

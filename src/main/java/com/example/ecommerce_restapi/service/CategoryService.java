@@ -3,6 +3,7 @@ package com.example.ecommerce_restapi.service;
 import com.example.ecommerce_restapi.dtos.CategoryDTO;
 import com.example.ecommerce_restapi.models.Category;
 import com.example.ecommerce_restapi.repositories.CategoryRepository;
+import com.example.ecommerce_restapi.service.exceptions.EntityNotFound;
 import com.example.ecommerce_restapi.service.interfaceService.Iservice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,14 +24,13 @@ public class CategoryService implements Iservice<CategoryDTO> {
 
     @Override
     public CategoryDTO findById(Long l) {
-        return null;
+        return new CategoryDTO(categoryRepository.findById(l).orElseThrow(()-> new EntityNotFound("Entity not found")));
     }
 
     @Override
     public void deleteById(Long l) {
 
     }
-
     @Override
     public CategoryDTO alter(Long l, CategoryDTO categoryDTO) {
         return null;

@@ -1,11 +1,16 @@
 package com.example.ecommerce_restapi.dtos;
 
 import com.example.ecommerce_restapi.models.Category;
+import lombok.Getter;
+import lombok.Setter;
 
-public class CategoryDTO {
+import java.io.Serializable;
+@Getter
+public class CategoryDTO implements Serializable {
+    private static final long serialVersionUID = 1L;
     private long id;
     private String name;
-    public CategoryDTO(Category entity){
+    public CategoryDTO(Category entity) {
         this.id=entity.getId();
         this.name=entity.getName();
     }

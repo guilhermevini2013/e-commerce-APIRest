@@ -1,4 +1,4 @@
-package com.example.ecommerce_restapi.service.interfaceService;
+package com.example.ecommerce_restapi.service.interfaces;
 
 import java.util.List;
 

@@ -4,12 +4,10 @@ import com.example.ecommerce_restapi.dtos.CategoryDTO;
 import com.example.ecommerce_restapi.models.Category;
 import com.example.ecommerce_restapi.repositories.CategoryRepository;
 import com.example.ecommerce_restapi.service.exceptions.EntityNotFound;
-import com.example.ecommerce_restapi.service.interfaceService.Iservice;
+import com.example.ecommerce_restapi.service.interfaces.Iservice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,11 +16,15 @@ public class CategoryService implements Iservice<CategoryDTO> {
     @Autowired
     CategoryRepository categoryRepository;
     @Override
+    @Transactional
     public CategoryDTO insert(CategoryDTO categoryDTO) {
-        return null;
+        Category entity = new Category(categoryDTO);
+        categoryRepository.save(entity);
+        return new CategoryDTO(entity);
     }
 
     @Override
+    @Transactional
     public CategoryDTO findById(Long l) {
         return new CategoryDTO(categoryRepository.findById(l).orElseThrow(()-> new EntityNotFound("Entity not found")));
     }

@@ -1,5 +1,6 @@
 package com.example.ecommerce_restapi.models;
 
+import com.example.ecommerce_restapi.dtos.CategoryDTO;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import jakarta.persistence.*;
 import lombok.*;
@@ -21,4 +22,9 @@ public class Category implements Serializable {
     private Long id;
     @NonNull
     private String name;
+
+    public Category(CategoryDTO categoryDTO) {
+        this.id= categoryDTO.getId();
+        this.name= categoryDTO.getName();
+    }
 }

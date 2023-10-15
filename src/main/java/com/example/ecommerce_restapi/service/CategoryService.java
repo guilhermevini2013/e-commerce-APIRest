@@ -36,7 +36,7 @@ public class CategoryService implements Iservice<CategoryDTO> {
     @Override
     public void deleteById(Long id) {
         try{
-
+            categoryRepository.deleteById(id);
         }catch (EmptyResultDataAccessException ex){
             throw new ResourceNotFoundException("Id not found "+id);
         }catch (DataIntegrityViolationException ex){
@@ -55,7 +55,6 @@ public class CategoryService implements Iservice<CategoryDTO> {
             throw new ResourceNotFoundException("Id not found "+id);
         }
     }
-
     @Override
     @Transactional(readOnly = true)
     public List<CategoryDTO> list() {

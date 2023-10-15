@@ -28,4 +28,14 @@ public class CategoryController {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(entity).toUri();
         return ResponseEntity.created(uri).body(entity);
     }
+    @PutMapping(value = "{id}")
+    public ResponseEntity<CategoryDTO> update(@PathVariable Long id,@RequestBody CategoryDTO dto){
+        dto = service.alter(id,dto);
+        return ResponseEntity.ok().body(dto);
+    }
+    @DeleteMapping(value = "{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        service.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
 }

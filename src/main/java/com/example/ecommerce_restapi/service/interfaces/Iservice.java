@@ -1,5 +1,8 @@
 package com.example.ecommerce_restapi.service.interfaces;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+
 import java.util.List;
 
 public interface Iservice<T> {
@@ -7,5 +10,5 @@ public interface Iservice<T> {
     T findById(Long l);
     void deleteById(Long l);
     T alter(Long l,T t);
-    List<T> list();
+    Page<T> list(PageRequest pr);
 }

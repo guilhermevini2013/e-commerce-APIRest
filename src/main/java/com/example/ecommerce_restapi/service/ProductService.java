@@ -27,7 +27,7 @@ public class ProductService implements Iservice<ProductDTO> {
     @Override
     @Transactional(readOnly = true)
     public Page<ProductDTO> list(PageRequest pr) {
-        return productRepository.findAll(pr).map(x-> new ProductDTO(x));
+        return productRepository.findAll(pr).map(x-> new ProductDTO(x,x.getCategories()));
     }
 
     @Override

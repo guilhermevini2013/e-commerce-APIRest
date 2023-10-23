@@ -1,7 +1,10 @@
 package com.example.ecommerce_restapi.service;
 
+import com.example.ecommerce_restapi.dtos.CategoryDTO;
 import com.example.ecommerce_restapi.dtos.ProductDTO;
+import com.example.ecommerce_restapi.models.Category;
 import com.example.ecommerce_restapi.models.Product;
+import com.example.ecommerce_restapi.repositories.CategoryRepository;
 import com.example.ecommerce_restapi.repositories.ProductRepository;
 import com.example.ecommerce_restapi.service.exceptions.ResourceNotFoundException;
 import com.example.ecommerce_restapi.service.interfaces.Iservice;
@@ -18,6 +21,8 @@ import java.util.Optional;
 public class ProductService implements Iservice<ProductDTO> {
     @Autowired
     private ProductRepository productRepository ;
+    @Autowired
+    private CategoryRepository categoryRepository;
     @Override
     @Transactional(readOnly = true)
     public ProductDTO findById(Long l) {
@@ -35,14 +40,31 @@ public class ProductService implements Iservice<ProductDTO> {
     }
 
     @Override
+    @Transactional
     public ProductDTO insert(ProductDTO productDTO) {
-        return null;
+        Product entity = new Product();
+        copyDTOtoEntity(productDTO,entity);
+        entity = productRepository.save(entity);
+        return new ProductDTO(entity);
     }
 
     @Override
+    @Transactional
     public ProductDTO alter(Long l, ProductDTO productDTO) {
-        return null;
+        Product entity = productRepository.getReferenceById(l);
+        copyDTOtoEntity(productDTO,entity);
+        entity = productRepository.save(entity);
+        return new ProductDTO(entity);
     }
-
+    private void copyDTOtoEntity(ProductDTO dto, Product entity){
+        entity.setName(dto.getName());
+        entity.setPrice(dto.getPrice());
+        entity.setDescription(dto.getDescription());
+        entity.setImgUrl(dto.getImgUrl());
+        for (CategoryDTO category: dto.getCategories()) {
+            Category c = categoryRepository.getReferenceById(category.getId());
+            entity.getCategories().add(c);
+        }
+    }
 
 }

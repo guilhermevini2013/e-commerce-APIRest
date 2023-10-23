@@ -15,7 +15,7 @@ public class ProductDTO {
     private String description;
     private Double price;
     private String imgUrl;
-    private Set<CategoryDTO> categoriesDTO = new HashSet<>();
+    private Set<CategoryDTO> categories = new HashSet<>();
 
     public ProductDTO(Product entity) {
         this.id=entity.getId();
@@ -26,6 +26,6 @@ public class ProductDTO {
     }
     public ProductDTO(Product entity,Set<Category> categories){
         this(entity);
-        categories.forEach(x-> categoriesDTO.add(new CategoryDTO(x)));
+        categories.forEach(x-> this.categories.add(new CategoryDTO(x)));
     }
 }

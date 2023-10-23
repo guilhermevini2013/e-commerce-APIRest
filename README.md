@@ -3,26 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <title>Documentação da API de E-commerce</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-    }
-    h1, h2, h3 {
-      color: #333;
-    }
-    p {
-      color: #666;
-    }
-    ul {
-      list-style: disc;
-      margin-left: 20px;
-    }
-    code {
-      background-color: #f0f0f0;
-      padding: 2px 4px;
-      border: 1px solid #ccc;
-    }
-  </style>
 </head>
 <body>
   <h1>Documentação da API de E-commerce</h1>

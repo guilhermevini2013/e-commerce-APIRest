@@ -102,10 +102,17 @@
 <p><strong>Corpo da solicitação (JSON):</strong></p>
 <pre>
 {
-  "name": "Nome do Produto",
-  "description": "Descrição do Produto (opcional)",
-  "price": 19.99,
-  "categoryId": 1
+  {
+  "name": "PS5",
+  "description": "The new generation PS5 video game",
+  "price": 600.0,
+  "imgUrl": "",
+  "categories": [
+    {
+      "id": 3
+    }
+  ]
+}
 }
 </pre>
 
@@ -118,10 +125,17 @@
 <p><strong>Corpo da solicitação (JSON):</strong></p>
 <pre>
 {
-  "name": "Novo Nome do Produto (opcional)",
-  "description": "Nova Descrição do Produto (opcional)",
-  "price": 24.99,
-  "categoryId": 2 (opcional)
+  {
+  "name": "Novo nome do Produto"(opcional),
+  "description": "Nova descricao"(opcional),
+  "price": 600.0,
+  "imgUrl": "" (opcional),
+  "categories": [
+    {
+      "id": 3 (opcional)
+    }
+  ]
+}
 }
 </pre>
 

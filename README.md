@@ -80,7 +80,57 @@
 
   <h2>Endpoints de Produtos</h2>
 
-  <!-- Documente os endpoints de produtos seguindo o mesmo padrão como feito para categorias -->
+<h3>Listar Produtos</h3>
+<p><strong>URL:</strong> <code>GET /products</code></p>
+<p><strong>Parâmetros de consulta:</strong></p>
+<ul>
+  <li><code>page</code> (opcional): Número da página (padrão: 0).</li>
+  <li><code>linesPerPage</code> (opcional): Número de produtos por página (padrão: 15).</li>
+  <li><code>direction</code> (opcional): Direção da ordenação (ASC ou DESC, padrão: ASC).</li>
+  <li><code>orderBy</code> (opcional): Campo para ordenação (padrão: "id").</li>
+</ul>
+
+<h3>Buscar Produto por ID</h3>
+<p><strong>URL:</strong> <code>GET /products/{id}</code></p>
+<p><strong>Parâmetros de URL:</strong></p>
+<ul>
+  <li><code>id</code> (obrigatório): ID do produto que deseja buscar.</li>
+</ul>
+
+<h3>Inserir Produto</h3>
+<p><strong>URL:</strong> <code>POST /products</code></p>
+<p><strong>Corpo da solicitação (JSON):</strong></p>
+<pre>
+{
+  "name": "Nome do Produto",
+  "description": "Descrição do Produto (opcional)",
+  "price": 19.99,
+  "categoryId": 1
+}
+</pre>
+
+<h3>Atualizar Produto</h3>
+<p><strong>URL:</strong> <code>PUT /products/{id}</code></p>
+<p><strong>Parâmetros de URL:</strong></p>
+<ul>
+  <li><code>id</code> (obrigatório): ID do produto que deseja atualizar.</li>
+</ul>
+<p><strong>Corpo da solicitação (JSON):</strong></p>
+<pre>
+{
+  "name": "Novo Nome do Produto (opcional)",
+  "description": "Nova Descrição do Produto (opcional)",
+  "price": 24.99,
+  "categoryId": 2 (opcional)
+}
+</pre>
+
+<h3>Excluir Produto</h3>
+<p><strong>URL:</strong> <code>DELETE /products/{id}</code></p>
+<p><strong>Parâmetros de URL:</strong></p>
+<ul>
+  <li><code>id</code> (obrigatório): ID do produto que deseja excluir.</li>
+</ul>
 
   <h2>Status de Resposta</h2>
   <ul>

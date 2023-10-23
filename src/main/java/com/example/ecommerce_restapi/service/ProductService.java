@@ -55,9 +55,8 @@ public class ProductService implements Iservice<ProductDTO> {
         Product entity = new Product();
         copyDTOtoEntity(productDTO,entity);
         entity = productRepository.save(entity);
-        return new ProductDTO(entity);
+        return new ProductDTO(entity,entity.getCategories());
     }
-
     @Override
     @Transactional
     public ProductDTO alter(Long id, ProductDTO productDTO) {
@@ -65,7 +64,7 @@ public class ProductService implements Iservice<ProductDTO> {
             Product entity = productRepository.getReferenceById(id);
             copyDTOtoEntity(productDTO,entity);
             entity = productRepository.save(entity);
-            return new ProductDTO(entity);
+            return new ProductDTO(entity,entity.getCategories());
         }catch (EntityNotFoundException ex){
             throw new ResourceNotFoundException("Id not found "+id);
         }

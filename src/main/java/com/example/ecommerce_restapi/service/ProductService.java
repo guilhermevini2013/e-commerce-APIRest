@@ -10,6 +10,7 @@ import com.example.ecommerce_restapi.service.exceptions.DataBaseException;
 import com.example.ecommerce_restapi.service.exceptions.ResourceNotFoundException;
 import com.example.ecommerce_restapi.service.interfaces.Iservice;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -59,11 +60,15 @@ public class ProductService implements Iservice<ProductDTO> {
 
     @Override
     @Transactional
-    public ProductDTO alter(Long l, ProductDTO productDTO) {
-        Product entity = productRepository.getReferenceById(l);
-        copyDTOtoEntity(productDTO,entity);
-        entity = productRepository.save(entity);
-        return new ProductDTO(entity);
+    public ProductDTO alter(Long id, ProductDTO productDTO) {
+        try{
+            Product entity = productRepository.getReferenceById(id);
+            copyDTOtoEntity(productDTO,entity);
+            entity = productRepository.save(entity);
+            return new ProductDTO(entity);
+        }catch (EntityNotFoundException ex){
+            throw new ResourceNotFoundException("Id not found "+id);
+        }
     }
     private void copyDTOtoEntity(ProductDTO dto, Product entity){
         entity.setName(dto.getName());

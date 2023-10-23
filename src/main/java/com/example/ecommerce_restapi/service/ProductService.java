@@ -6,10 +6,13 @@ import com.example.ecommerce_restapi.models.Category;
 import com.example.ecommerce_restapi.models.Product;
 import com.example.ecommerce_restapi.repositories.CategoryRepository;
 import com.example.ecommerce_restapi.repositories.ProductRepository;
+import com.example.ecommerce_restapi.service.exceptions.DataBaseException;
 import com.example.ecommerce_restapi.service.exceptions.ResourceNotFoundException;
 import com.example.ecommerce_restapi.service.interfaces.Iservice;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -36,9 +39,15 @@ public class ProductService implements Iservice<ProductDTO> {
     }
 
     @Override
-    public void deleteById(Long l) {
+    public void deleteById(Long id) {
+        try{
+            productRepository.deleteById(id);
+        }catch (EmptyResultDataAccessException ex){
+            throw new ResourceNotFoundException("Id not found "+id);
+        }catch (DataIntegrityViolationException ex){
+            throw new DataBaseException("Integrity Violation");
+        }
     }
-
     @Override
     @Transactional
     public ProductDTO insert(ProductDTO productDTO) {
@@ -66,5 +75,4 @@ public class ProductService implements Iservice<ProductDTO> {
             entity.getCategories().add(c);
         }
     }
-
 }

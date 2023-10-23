@@ -2,7 +2,6 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Documentação da API de E-commerce</title>
 </head>
 <body>
   <h1>Documentação da API de E-commerce</h1>

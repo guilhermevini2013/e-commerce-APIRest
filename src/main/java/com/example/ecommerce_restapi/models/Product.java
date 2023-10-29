@@ -21,7 +21,7 @@ public class Product {
     private String description;
     private Double price;
     @Column(columnDefinition = "TEXT")
-    private String imgUrl;
+    private String img_url;
     @ManyToMany
     @JoinTable(name = "tb_product_category",
             joinColumns= @JoinColumn(name = "product_id"),
@@ -33,6 +33,6 @@ public class Product {
         this.name = name;
         this.description = description;
         this.price = price;
-        this.imgUrl = urlImg;
+        this.img_url = urlImg;
     }
 }

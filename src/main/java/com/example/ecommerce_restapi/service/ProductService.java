@@ -44,7 +44,7 @@ public class ProductService implements Iservice<ProductDTO> {
         try{
             productRepository.deleteById(id);
         }catch (EmptyResultDataAccessException ex){
-            throw new ResourceNotFoundException("Id not found "+id);
+            throw new ResourceNotFoundException("Id not Found "+id);
         }catch (DataIntegrityViolationException ex){
             throw new DataBaseException("Integrity Violation");
         }
@@ -73,7 +73,7 @@ public class ProductService implements Iservice<ProductDTO> {
         entity.setName(dto.getName());
         entity.setPrice(dto.getPrice());
         entity.setDescription(dto.getDescription());
-        entity.setImgUrl(dto.getImgUrl());
+        entity.setImg_url(dto.getImgUrl());
         for (CategoryDTO category: dto.getCategories()) {
             Category c = categoryRepository.getReferenceById(category.getId());
             entity.getCategories().add(c);

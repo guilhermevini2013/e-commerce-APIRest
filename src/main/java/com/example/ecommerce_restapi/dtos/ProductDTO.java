@@ -22,7 +22,7 @@ public class ProductDTO {
         this.name= entity.getName();
         this.description=entity.getDescription();
         this.price=entity.getPrice();
-        this.imgUrl=entity.getImgUrl();
+        this.imgUrl=entity.getImg_url();
     }
     public ProductDTO(Product entity,Set<Category> categories){
         this(entity);

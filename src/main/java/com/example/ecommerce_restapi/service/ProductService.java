@@ -42,9 +42,8 @@ public class ProductService implements Iservice<ProductDTO> {
     @Override
     public void deleteById(Long id) {
         try{
-            productRepository.deleteById(id);
-        }catch (EmptyResultDataAccessException ex){
-            throw new ResourceNotFoundException("Id not Found "+id);
+            Product product = productRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Id not Found "+id));
+            productRepository.delete(product);
         }catch (DataIntegrityViolationException ex){
             throw new DataBaseException("Integrity Violation");
         }

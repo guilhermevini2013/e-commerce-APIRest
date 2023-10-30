@@ -36,9 +36,8 @@ public class CategoryService implements Iservice<CategoryDTO> {
     @Override
     public void deleteById(Long id) {
         try{
-            categoryRepository.deleteById(id);
-        }catch (EmptyResultDataAccessException ex){
-            throw new ResourceNotFoundException("Id not found "+id);
+            Category category = categoryRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Id not found "+id));
+            categoryRepository.delete(category);
         }catch (DataIntegrityViolationException ex){
             throw new DataBaseException("Integrity Violation");
         }

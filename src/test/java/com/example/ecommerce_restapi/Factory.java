@@ -1,5 +1,6 @@
 package com.example.ecommerce_restapi;
 
+import com.example.ecommerce_restapi.dtos.CategoryDTO;
 import com.example.ecommerce_restapi.dtos.ProductDTO;
 import com.example.ecommerce_restapi.models.Category;
 import com.example.ecommerce_restapi.models.Product;
@@ -13,5 +14,11 @@ public class Factory {
     public static ProductDTO createProductDTO(){
         Product entity = createProduct();
         return new ProductDTO(entity,entity.getCategories());
+    }
+    public static Category createCategory(){
+        return new Category(1l,"test");
+    }
+    public static CategoryDTO createCategoryDTO(){
+        return new CategoryDTO(createCategory());
     }
 }

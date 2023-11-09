@@ -13,8 +13,12 @@ import java.net.URI;
 @RestController
 @RequestMapping("/categories")
 public class CategoryController {
-    @Autowired
     CategoryService service;
+    @Autowired
+    public CategoryController(CategoryService service) {
+        this.service = service;
+    }
+
     @GetMapping
     public ResponseEntity<Page<CategoryDTO>> list(@RequestParam(value = "page", defaultValue = "0") Integer pages,
                                                   @RequestParam(value = "linesPerPage", defaultValue = "15")Integer linesPerPage,

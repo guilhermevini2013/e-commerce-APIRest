@@ -8,6 +8,7 @@ import com.example.ecommerce_restapi.service.exceptions.ResourceNotFoundExceptio
 import com.example.ecommerce_restapi.service.interfaces.Iservice;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
@@ -17,8 +18,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class CategoryService implements Iservice<CategoryDTO> {
-    @Autowired
     CategoryRepository categoryRepository;
+    @Autowired
+    public CategoryService(CategoryRepository categoryRepository) {
+        this.categoryRepository = categoryRepository;
+    }
     @Override
     @Transactional
     public CategoryDTO insert(CategoryDTO categoryDTO) {

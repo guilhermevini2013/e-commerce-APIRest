@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class CategoryService implements Iservice<CategoryDTO> {
+public class CategoryService implements Iservice<CategoryDTO,CategoryDTO> {
     CategoryRepository categoryRepository;
     @Autowired
     public CategoryService(CategoryRepository categoryRepository) {

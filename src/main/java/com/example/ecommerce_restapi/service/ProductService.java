@@ -22,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Service
-public class ProductService implements Iservice<ProductDTO> {
+public class ProductService implements Iservice<ProductDTO,ProductDTO> {
     @Autowired
     private ProductRepository productRepository ;
     @Autowired

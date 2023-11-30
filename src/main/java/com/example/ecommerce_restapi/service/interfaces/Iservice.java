@@ -5,8 +5,8 @@ import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
 
-public interface Iservice<T> {
-    T insert(T t);
+public interface Iservice<T,S> {
+    T insert(S t);
     T findById(Long l);
     void deleteById(Long l);
     T alter(Long l,T t);

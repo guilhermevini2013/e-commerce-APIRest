@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{css/styleProduct.css}">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+<body>
+    <nav>
+        <div class="nav-img">
+            <img th:src="@{css/img/logo2.png}" alt="">
+        </div>
+        <div class="nav-link">
+            <a th:href="@{/index}">Home</a>
+            <a th:href="@{/product}">Product</a>
+            <a th:href="@{/category}">Category</a>
+        </div>
+    </nav>
+    <div class="section-form">
+        <div class="inf-product">
+            <form th:action="@{/product}" method="post" th:object="${product}">
+                <div class="inf-product-name">
+                    <input type="text" placeholder="Name product" class="inf-product-name-input" th:field="${product.name}">
+                    <input type="text" placeholder="Price" class="inf-product-name-input" th:field="${product.price}">
+                </div>
+                <div class="inf-product-url">
+                    <input type="text" placeholder="URL image product" class="inf-product-name-input" th:field="${product.imgUrl}">
+                    <textarea placeholder="Description" class="area" th:field="${product.description}"></textarea>
+                    <p>Categories</p>
+                    <select class="combo" th:field="${product.categories}" multiple>
+                        <option th:each="category : ${listCategory}" th:value="${category.id}" th:text="${category.name}"></option>
+                    </select>
+                </div>
+                <button type="submit" class="bnt-submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

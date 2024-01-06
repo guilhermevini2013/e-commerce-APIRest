@@ -2,12 +2,16 @@ package com.example.ecommerce_restapi.dtos;
 
 import com.example.ecommerce_restapi.models.Category;
 import com.example.ecommerce_restapi.models.Product;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Set;
 @NoArgsConstructor
+@AllArgsConstructor
+@Setter
 @Getter
 public class ProductDTO {
     private Long id;

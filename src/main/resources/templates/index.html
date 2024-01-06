@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{css/style.css}">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+<body>
+    <nav>
+        <div class="nav-img">
+            <img th:src="@{css/img/logo.png}" alt="">
+        </div>
+        <div class="nav-link">
+            <a th:href="@{/index}">Home</a>
+            <a th:href="@{/product}">Product</a>
+            <a th:href="@{/category}">Category</a>
+        </div>
+    </nav>
+    <div>
+        <div class="section-principal">
+            <div class="section-input">
+                <form th:action="@{/index}" method="post">
+                    <input type="text" placeholder="search" name="productName">
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+            <div class="section-products">
+                <div th:if="${#lists.isEmpty(listProduct)}">
+                    <p class="warn">No Products Found.</p>
+                </div>
+                <div class="product" th:each="product : ${listProduct}">
+                    <div class="product-img">
+                        <img th:src="${product.getImgUrl()}" alt="">
+                    </div>
+                    <div class="product-inf">
+                        <span th:text="${product.name}"></span>
+                        <span>$<span th:text="${product.price}"></span></span>
+                        <div>
+                        <li th:each="category : ${product.getCategories()}">
+                            <span th:text="${category.name}"></span>
+                        </li>
+                        </div>
+                        <div class="delete-bnt">
+                            <form th:action="@{/remover}" method="post">
+                                <input type="hidden" name="idContent" th:value="${product.id}">
+                                <button type="submit"><ion-icon name="trash-outline" class="icon2"></ion-icon></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

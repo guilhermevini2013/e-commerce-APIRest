@@ -1,0 +1,174 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+nav {
+    width: 100%;
+    padding: 20px 10px;
+    display: flex;
+    justify-content: space-evenly;
+    justify-items: center;
+    align-items: center;
+    background-color: #ADD8E6;
+}
+nav .nav-img img{
+    width: 20%;
+}
+nav .nav-link{
+    width: 32%;
+    display: flex;
+    justify-content: space-evenly;
+    justify-items: center;
+    align-items: center;
+}
+nav .nav-link a{
+    font-size: 17px;
+    color: #272739;
+    text-decoration: none;
+}
+.section-principal{
+    padding: 20px 15%;
+}
+.section-products {
+    display:grid;
+    grid-auto-flow: row;
+    grid-template-columns: repeat(4,1fr);
+    gap: 20px;
+    padding: 20px;
+}
+
+.product {
+    width: 250px;
+    box-shadow: rgba(0, 0, 0, 0.29) 0px 3px 8px;
+    padding: 15px;
+    text-align: center;
+    border-radius: 10px;
+}
+.product:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Sombra mais pronunciada ao passar o mouse */
+    transform: translateY(-3px); /* Efeito de elevação */
+}
+.product-img{
+    width: 100%;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+}
+.product-img img {
+    width: 100%;
+    height: 260px;
+}
+.product-inf{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+.product-inf div{
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.product-inf div li{
+    list-style-type: none;
+}
+.product-inf div span{
+    font-size: 11px;
+    background-color: #ADD8E6;
+    padding: 2px 4px;
+    border-radius: 20px;
+}
+.section-input{
+    margin-left: 3%;
+}
+.section-input input{
+    padding: 7px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    outline: none;
+    transition: box-shadow 0.3s ease-in-out;
+    width: 300px; /* Largura do campo, ajuste conforme necessário */
+}
+.section-input button{
+    padding: 7px 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    outline: none;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease-in-out, transform 0.2s ease-in-out;
+    margin-left: 10px;
+}
+.section-input button:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra mais pronunciada ao passar o mouse */
+    transform: translateY(-2px); /* Efeito de elevação */
+}
+.warn{
+    color: #d3d3d3;
+}
+.section-form {
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start; /* Ajustado para alinhar no topo */
+    justify-content: center;
+}
+
+.inf-product {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 480px; /* Aumentado a largura */
+    margin-top: 70px; /* Ajustado para mover mais para cima */
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.inf-product-name,
+.inf-product-url {
+    margin-bottom: 15px;
+}
+
+.inf-product-name-input,
+.area,
+.combo{
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
+    width: 100%;
+}
+
+.area {
+    resize: none;
+}
+
+.inf-product-name-input:focus,
+.area:focus {
+    outline: none;
+    border-color: #5f9ea0;
+}
+
+.bnt-submit {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #5f9ea0;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.bnt-submit:hover {
+    background-color: #4c8c8d;
+}

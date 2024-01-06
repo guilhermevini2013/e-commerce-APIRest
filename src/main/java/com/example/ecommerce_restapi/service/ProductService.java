@@ -2,6 +2,7 @@ package com.example.ecommerce_restapi.service;
 
 import com.example.ecommerce_restapi.dtos.CategoryDTO;
 import com.example.ecommerce_restapi.dtos.ProductDTO;
+import com.example.ecommerce_restapi.dtos.ProductInsertDTO;
 import com.example.ecommerce_restapi.models.Category;
 import com.example.ecommerce_restapi.models.Product;
 import com.example.ecommerce_restapi.repositories.CategoryRepository;
@@ -19,62 +20,73 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ProductService implements Iservice<ProductDTO,ProductDTO> {
+public class ProductService  {
     @Autowired
     private ProductRepository productRepository ;
     @Autowired
     private CategoryRepository categoryRepository;
-    @Override
+
     @Transactional(readOnly = true)
     public ProductDTO findById(Long l) {
         Optional<Product> product = Optional.ofNullable(productRepository.findById(l).orElseThrow(() -> new ResourceNotFoundException("id not found " + l)));
         return new ProductDTO(product.get(),product.get().getCategories());
     }
-    @Override
+
     @Transactional(readOnly = true)
-    public Page<ProductDTO> list(PageRequest pr) {
-        return productRepository.findAll(pr).map(x-> new ProductDTO(x,x.getCategories()));
+    public List<ProductDTO> list() {
+        return productRepository.findAll().stream().map(x-> new ProductDTO(x,x.getCategories())).toList();
     }
 
-    @Override
+
     public void deleteById(Long id) {
         try{
             Product product = productRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Id not Found "+id));
-            productRepository.delete(product);
+            removecategori(product);
+            productRepository.deleteById(product.getId());
         }catch (DataIntegrityViolationException ex){
             throw new DataBaseException("Integrity Violation");
         }
     }
-    @Override
+    private void removecategori(Product product){
+        product.setCategories(new HashSet<>());
+        productRepository.save(product);
+    }
+    @Transactional(readOnly = true)
+    public List<ProductDTO> listFilter(String name, String category){
+        return productRepository.findProductByFilter(name,category).stream().map(x-> new ProductDTO(x,x.getCategories())).toList();
+    }
+
     @Transactional
-    public ProductDTO insert(ProductDTO productDTO) {
+    public ProductDTO insert(ProductInsertDTO productDTO) {
         Product entity = new Product();
         copyDTOtoEntity(productDTO,entity);
         entity = productRepository.save(entity);
         return new ProductDTO(entity,entity.getCategories());
     }
-    @Override
-    @Transactional
-    public ProductDTO alter(Long id, ProductDTO productDTO) {
-        try{
-            Product entity = productRepository.getReferenceById(id);
-            copyDTOtoEntity(productDTO,entity);
-            entity = productRepository.save(entity);
-            return new ProductDTO(entity,entity.getCategories());
-        }catch (EntityNotFoundException ex){
-            throw new ResourceNotFoundException("Id not found "+id);
-        }
-    }
-    private void copyDTOtoEntity(ProductDTO dto, Product entity){
-        entity.setName(dto.getName());
-        entity.setPrice(dto.getPrice());
-        entity.setDescription(dto.getDescription());
-        entity.setImg_url(dto.getImgUrl());
-        for (CategoryDTO category: dto.getCategories()) {
-            Category c = categoryRepository.getReferenceById(category.getId());
+
+//    @Transactional
+//    public ProductDTO alter(Long id, ProductDTO productDTO) {
+//        try{
+//            Product entity = productRepository.getReferenceById(id);
+//            copyDTOtoEntity(productDTO,entity);
+//            entity = productRepository.save(entity);
+//            return new ProductDTO(entity,entity.getCategories());
+//        }catch (EntityNotFoundException ex){
+//            throw new ResourceNotFoundException("Id not found "+id);
+//        }
+//    }
+    private void copyDTOtoEntity(ProductInsertDTO dto, Product entity){
+        entity.setName(dto.name());
+        entity.setPrice(dto.price());
+        entity.setDescription(dto.description());
+        entity.setImg_url(dto.imgUrl());
+        for (Long category: dto.categories()) {
+            Category c = categoryRepository.getReferenceById(category);
             entity.getCategories().add(c);
         }
     }

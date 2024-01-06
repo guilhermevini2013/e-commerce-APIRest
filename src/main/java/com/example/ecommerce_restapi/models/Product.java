@@ -22,7 +22,7 @@ public class Product {
     private Double price;
     @Column(columnDefinition = "TEXT")
     private String img_url;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "tb_product_category",
             joinColumns= @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
